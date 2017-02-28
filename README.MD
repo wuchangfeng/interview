@@ -272,19 +272,12 @@
 
 -   Java 注解的作用
 
-          a. 标记，用于告诉编译器一些信息
-          b. 编译时动态处理，如动态生成代码
-          c. 运行时动态处理，如得到注解信息
-          
-          1>标准 Annotation
-          
-          2> 元 Annotation
-          
-          3> 自定义 Annotation
+      a. 标记，用于告诉编译器一些信息b. 编译时动态处理，如动态生成代码 c. 运行时动态处理，如得到注解信息
+       标准 Annotation 元 Annotation 自定义 Annotation
 
 -   **有了解什么是IntentService么？**
 
-          intentService 是继承自 Service 并处理异步请求的一个类，在 IntentService 内有一个工作线程来处理耗时操作，当任务执行完后，IntentService 会自动停止，不需要我们去手动结束。如果启动 IntentService 多次，那么每一个耗时操作会以工作队列的方式在 IntentService 的 onHandleIntent 回调方法中执行，依次去执行，执行完自动结束。
+      intentService 是继承自 Service 并处理异步请求的一个类，在 IntentService 内有一个工作线程来处理耗时操作，当任务执行完后，IntentService 会自动停止，不需要我们去手动结束。如果启动 IntentService 多次，那么每一个耗时操作会以工作队列的方式在 IntentService 的 onHandleIntent 回调方法中执行，依次去执行，执行完自动结束。
 
 -   缓存算法的种类
 
@@ -302,13 +295,13 @@
 
 -   Java 如何进行 GC ，判断对象回收的条件是什么  http://www.jianshu.com/p/424e12b3a08f
 
-          JVM进行次GC的频率很高,但因为这种GC占用时间极短,所以对系统产生的影响不大。更值得关注的是主GC的触发条件,因为它对系统影响很明显。总的来说,有两个条件会触发主GC:
+                JVM进行次GC的频率很高,但因为这种GC占用时间极短,所以对系统产生的影响不大。更值得关注的是主GC的触发条件,因为它对系统影响很明显。总的来说,有两个条件会触发主GC:
 
-          　　1：当应用程序空闲时,即没有应用线程在运行时,GC会被调用。因为GC在优先级最低的线程中进行,所以当应用忙时,GC线程就不会被调用,但以下条件除外。
+                　　1：当应用程序空闲时,即没有应用线程在运行时,GC会被调用。因为GC在优先级最低的线程中进行,所以当应用忙时,GC线程就不会被调用,但以下条件除外。
 
-          　　2：Java堆内存不足时,GC会被调用。当应用线程在运行,并在运行过程中创建新对象,若这时内存空间不足,JVM就会强制地调用GC线程,以便回收内存用于新的分配。若GC一次之后仍不能满足内存分配的要求,JVM会再进行两次GC作进一步的尝试,若仍无法满足要求,则 JVM将报“out of memory”的错误,Java应用将停止。
+                　　2：Java堆内存不足时,GC会被调用。当应用线程在运行,并在运行过程中创建新对象,若这时内存空间不足,JVM就会强制地调用GC线程,以便回收内存用于新的分配。若GC一次之后仍不能满足内存分配的要求,JVM会再进行两次GC作进一步的尝试,若仍无法满足要求,则 JVM将报“out of memory”的错误,Java应用将停止。
 
-          由于是否进行主GC由JVM根据系统环境决定,而系统环境在不断的变化当中,所以主GC的运行具有不确定性,无法预计它何时必然出现,但可以确定的是对一个长期运行的应用来说,其主GC是反复进行的。
+                由于是否进行主GC由JVM根据系统环境决定,而系统环境在不断的变化当中,所以主GC的运行具有不确定性,无法预计它何时必然出现,但可以确定的是对一个长期运行的应用来说,其主GC是反复进行的。
 
 -   垃圾对象的判定即什么时候进行回收？
 
@@ -369,31 +362,32 @@
 
 -   Java 的内存模型
 
-          简单来讲，具备：堆内存、栈内存，以及其他。
+      ​
 
 -   内存泄露的原因是什么？内部类为什么会持有外部类的引用
 
-          内部类在构建时候，产生了 外部类名.this 的对象，从而导致依赖外部类。下面的实例是静态内部类和弱引用解决 handler 引起的内存泄漏。
+      内部类在构建时候，产生了 外部类名.this 的对象，从而导致依赖外部类。下面的实例是静态内部类和弱引用解决 handler 引起的内存泄漏。
 
-    ```java
-          private static class MyHandler extends Handler {
-              private final WeakReference<SampleActivity> mActivity;
 
-              public MyHandler(SampleActivity activity) {
-                  mActivity = new WeakReference<SampleActivity>(activity);
-              }
-
-              @Override
-              public void handleMessage(Message msg) {
-                  SampleActivity activity = mActivity.get();
-                  if (activity != null) {
-                      // ...
+    ​```java
+              private static class MyHandler extends Handler {
+                  private final WeakReference<SampleActivity> mActivity;
+    
+                  public MyHandler(SampleActivity activity) {
+                      mActivity = new WeakReference<SampleActivity>(activity);
+                  }
+    
+                  @Override
+                  public void handleMessage(Message msg) {
+                      SampleActivity activity = mActivity.get();
+                      if (activity != null) {
+                          // ...
+                      }
                   }
               }
-          }
-
-          private final MyHandler mHandler = new MyHandler(this);
-    ```
+    
+              private final MyHandler mHandler = new MyHandler(this);
+    ​```
 
 -   **如何实现一个线程池（线程池原理），优点是什么？**
 
@@ -411,7 +405,7 @@
 
 -   七种单列模式 http://wuchong.me/blog/2014/08/28/how-to-correctly-write-singleton-pattern/
 
-          一般来说，单例模式有五种写法：懒汉、饿汉、双重检验锁、静态内部类、枚举。下面这种是静态内部类机制。这种写法仍然使用JVM本身机制**保证了线程安全问题**；由于 SingletonHolder 是私有的，除了 getInstance() 之外没有办法访问它，**因此它是懒汉式的**；同时读取实例的时候不会进行同步，没有性能缺陷；也不依赖 JDK 版本。
+      一般来说，单例模式有五种写法：懒汉、饿汉、双重检验锁、静态内部类、枚举。下面这种是静态内部类机制。这种写法仍然使用JVM本身机制**保证了线程安全问题**；由于 SingletonHolder 是私有的，除了 getInstance() 之外没有办法访问它，**因此它是懒汉式的**；同时读取实例的时候不会进行同步，没有性能缺陷；也不依赖 JDK 版本。
 
 
 ```java
@@ -452,29 +446,17 @@ public class Singleton {
 
 -   Exception
 
-    `Exception`类及其子类是`Throwable`的一种形式，它**指出了合理的应用程序想要捕获的条件**。对于可以恢复的条件使用被检查异常（Exception的子类中除了`RuntimeException`之外的其它子类），对于程序错误使用运行时异常。
+      `Exception`类及其子类是`Throwable`的一种形式，它**指出了合理的应用程序想要捕获的条件**。对于可以恢复的条件使用被检查异常（Exception的子类中除了`RuntimeException`之外的其它子类），对于程序错误使用运行时异常。
 
 -   static 关键字
 
--    在程序中任何变量或者代码都是在编译时由系统自动分配内存来存储的。`static`修饰符表示静态的，在类加载时`JVM`**会把它放到方法区，被本类以及本类的所有实例所共用**。在编译后所分配的内存会一直存在，直到程序退出内存才会释放这个空间。如果一个被所有实例共用的方法被申明为`static`，那么就可以节省空间，不用每个实例初始化的时候都被分配到内存。
+      在程序中任何变量或者代码都是在编译时由系统自动分配内存来存储的。`static`修饰符表示静态的，在类加载时`JVM`**会把它放到方法区，被本类以及本类的所有实例所共用**。在编译后所分配的内存会一直存在，直到程序退出内存才会释放这个空间。如果一个被所有实例共用的方法被申明为`static`，那么就可以节省空间，不用每个实例初始化的时候都被分配到内存。我们比较常见的`static`修饰是在静态变量和静态方法中。它们可以直接通过类名来访问。
 
-     我们比较常见的`static`修饰是在静态变量和静态方法中。它们可以直接通过类名来访问。
-
--   wait()和sleep()的区别
-
-    这两个方法来自不同的类分别是：`sleep`来自`Thread`类；`wait`来自`Object`类。
-
-    sleep是Thread的静态类方法，谁调用的谁去睡觉，即使在a线程里调用b的sleep方法，实际上还是a去睡觉，要让b线程睡觉要在b的代码中调用sleep。
-
-    **锁方面** sleep 没有释放锁，wait 释放了锁。
+-   wait() 和sleep() 之间的区别
 
 
-        最主要是`sleep`方法没有释放锁，而`wait`方法释放了锁，使得其他线程可以使用同步控制块或者方法。
-            `sleep`不出让系统资源；`wait`是进入线程等待池等待，出让系统资源，其他线程可以占用CPU。一般`wait`不会加时间限制，因为如果`wait`线程的运行资源不够，再出来也没用，要等待其他线程调用`notify/notifyAll`唤醒等待池中的所有线程，才会进入就绪队列等待OS分配系统资源。`sleep(milliseconds)`可以用时间指定使它自动唤醒过来，如果时间不到只能调用`interrupt()`强行打断。`Thread.sleep(0)`的作用是“触发操作系统立刻重新进行一次CPU竞争”。**wait和sleep/yield的区别** (1)线程状态变化不同 wait()是让线程由“运行状态”进入到“等待(阻塞)状态”，而yield()是让线程由“运行状态”进入到“就绪状态”，从而让其它具有相同优先级的等待线程获取执行权；但是，并不能保证在当前线程调用yield()之后，其它具有相同优先级的线程就一定能获得执行权。 (2)线程是否释放锁 wait()会使线程释放它所持有对象的同步锁，而yield()方法不会释放锁。
-          
-            **使用范围方面**
-          
-            wait，notify和notifyAll只能在同步控制方法或者同步控制块里面使用，而sleep可以在任何地方使用。  
+
+
 
 -   Java 中的几种引用类型： 强引用，软引用，弱引用，虚引用
 
@@ -596,7 +578,7 @@ public class Singleton {
 
   **BACK键：**当我们按BACK键时，我们这个应用程序将结束，这时候我们将先后调用onPause()->onStop()->onDestory()三个方法。再次启动App时，会执行onCreate()->onStart()->onResume()
 
-  **HOME键:**当我们打开应用程序时，比如浏览器，我正在浏览NBA新闻，看到一半时，我突然想听歌，这时候我们会选择按HOME键，然后去打开音乐应用程序，而当我们按HOME的时候，Activity先后执行了onPause()->onStop()这两个方法，**这时候应用程序并没有销毁**。
+  **HOME键:**当我们打开应用程序时，比如浏览器，我正在浏览NBA新闻，看到一半时，我突然想听歌，这时候我们会选择按HOME键，然后去打开音乐应用程序，而当我们按HOME的时候，Activity先后执行了onPause()->onStop()这两个方法，**这时候应用程序并没有销毁**。**不可见时候，都执行了 onStop() 这个方法**。
 
   而当我们从桌面再次启动应用程序时，则先后分别执行了**onRestart()**->onStart()->onResume()三个方法。
 
@@ -705,7 +687,7 @@ public class Singleton {
 
 - Intent 的匹配规则？action，category，data
 
-  只有action、data、category三方都匹配，Intent才算是匹配成功，进而才能打开相应的Component。**一个****Component****若声明了多个****Intent Filter****，只需要匹配任意一个即可启动该组件。**
+  只有action、data、category三方都匹配，Intent才算是匹配成功，进而才能打开相应的Component。一个Component若声明了多个Intent Filter，只需要匹配任意一个即可启动该组件。
 
 - 触摸事件分发机制，举了几个特定的例子
 
@@ -863,11 +845,11 @@ public class Singleton {
 
   内置诸如click事件的实现等等都基于onTouchEvent，假如onTouch返回true，这些事件将不会被触发。
 
-  【1】OnTouchEvent()方法：
+  * OnTouchEvent()方法：
 
         onTouchEvent是手机屏幕事件的处理方法，是获取的对屏幕的各种操作，比如向左向右滑动，点击返回按钮等等。属于一个宏观的屏幕触摸监控。onTouchEvent方法是override 的Activity的方法。重新了Activity的onTouchEvent方法后，当屏幕有touch事件时，此方法就会别调用。
 
-  【2】OnTouch方法
+  * OnTouch方法
 
         onTouch()是OnTouchListener接口的方法，它是获取某一个控件的触摸事件，因此使用时，必须使用setOnTouchListener绑定到控件，然后才能鉴定该控件的触摸事件。当一个View绑定了OnTouchLister后，当有touch事件触发时，就会调用onTouch方法。通过getAction()方法可以获取当前触摸事件的状态：
 
@@ -895,196 +877,220 @@ public class Singleton {
   ArrayMap是一个<**key,value**>映射的[数据结构](http://lib.csdn.net/base/datastructure)，它设计上更多的是考虑内存的优化，内部是使用两个数组进行数据存储，一个数组记录key的hash值，另外一个数组记录Value值，它和SparseArray一样，也会对key使用二分法进行从小到大排序，在添加、删除、查找数据的时候都是先使用二分查找法得到相应的index，然后通过index来进行添加、查找、删除等操作，所以，应用场景和SparseArray的一样，如果在数据量比较大的情况下，那么它的性能将退化至少50%。
 
 
-- Java 静态方法可以被重写吗？
+-    Java 静态方法可以被重写吗？
 
-  如果从重写方法会有什么特点来看，我们是不能重写静态方法的。虽然就算你重写静态方法，编译器也不会报错。也就是说，如果你试图重写静态方法，Java不会阻止你这么做，但你却得不到预期的结果（重写仅对非静态方法有用）。重写指的是根据运行时对象的类型来决定调用哪个方法，而不是根据编译时的类型。让我们猜一猜为什么静态方法是比较特殊的？因为它们是类的方法，所以它们在编译阶段就使用编译出来的类型进行绑定了。使用对象引用来访问静态方法只是Java设计者给程序员的自由。我们应该直接使用类名来访问静态方法，而不要使用对象引用来访问。
+     如果从重写方法会有什么特点来看，我们是不能重写静态方法的。虽然就算你重写静态方法，编译器也不会报错。也就是说，如果你试图重写静态方法，Java不会阻止你这么做，但你却得不到预期的结果（重写仅对非静态方法有用）。重写指的是根据运行时对象的类型来决定调用哪个方法，而不是根据编译时的类型。让我们猜一猜为什么静态方法是比较特殊的？因为它们是类的方法，所以它们在编译阶段就使用编译出来的类型进行绑定了。使用对象引用来访问静态方法只是Java设计者给程序员的自由。我们应该直接使用类名来访问静态方法，而不要使用对象引用来访问。
 
-- 如何解决 GC 循环引用带来的问题
+-    如何解决 GC 循环引用带来的问题
 
-  GC root，几乎所有的 jvm 都是采用引用遍历的方法来解决循环引用潜在的问题
+        GC root，几乎所有的 jvm 都是采用引用遍历的方法来解决循环引用潜在的问题
 
-- TCP 如何保证传输可靠
+-    TCP 如何保证传输可靠
 
-  有超时重传机制，丢失重传机制
+        有超时重传机制，丢失重传机制
 
-- 什么是三级缓存
+-    什么是三级缓存
 
-  - 网络缓存, 不优先加载, 速度慢,浪费流量
-  - 本地缓存, 次优先加载, 速度快
-  - 内存缓存, 优先加载, 速度最快
+     - 网络缓存, 不优先加载, 速度慢,浪费流量
+     - 本地缓存, 次优先加载, 速度快
+     - 内存缓存, 优先加载, 速度最快
 
-- Android 中的 IPC 机制
+-    Android 中的 IPC 机制
 
-  - 使用文件
-  - 使用 messager
-  - 使用 socket
-  - 使用 contentprovider
-  - 使用 bundle
-  - 使用 AIDL
+     - 使用文件
+     - 使用 messager
+     - 使用 socket
+     - 使用 contentprovider
+     - 使用 bundle
+     - 使用 AIDL
 
-- AIDL 机制，其实就是 android 中的 ipc 机制
+-    AIDL 机制，其实就是 android 中的 ipc 机制
 
-  所谓AIDL：Android Interface Definition Language，是一种Android接口定义语言，用于编写Android进程间通信代码。也就是说AIDL只是一个实现进程间通信的一个工具，真正实现Android进程间通信机制的其实是幕后“主谋”Binder机制。所有有关AIDL实现进程间通信都是依赖于Android的Binder机制，那么这个Binder机制到底是个什么东西呢？
+        所谓AIDL：Android Interface Definition Language，是一种Android接口定义语言，用于编写Android进程间通信代码。也就是说AIDL只是一个实现进程间通信的一个工具，真正实现Android进程间通信机制的其实是幕后“主谋”Binder机制。所有有关AIDL实现进程间通信都是依赖于Android的Binder机制，那么这个Binder机制到底是个什么东西呢？
 
-  AIDL适用场景
+        AIDL适用场景
 
-  官方文档特别提醒我们何时使用AIDL是必要的：只有你允许客户端从不同的应用程序为了进程间的通信而去访问你的service，以及想在你的service处理多线程。具体的不同场景下的AIDL设计规则如下：
+        官方文档特别提醒我们何时使用AIDL是必要的：只有你允许客户端从不同的应用程序为了进程间的通信而去访问你的service，以及想在你的service处理多线程。具体的不同场景下的AIDL设计规则如下：
 
-  如果不需要进行不同应用程序间的并发通信(IPC)，通过实现一个Binder对象来创建接口；或者你想进行IPC，但不需要处理多线程的，则使用Messenger对象来创建接口。无论如何，在使用AIDL前，必须要理解如何绑定service——bindService。
+        如果不需要进行不同应用程序间的并发通信(IPC)，通过实现一个Binder对象来创建接口；或者你想进行IPC，但不需要处理多线程的，则使用Messenger对象来创建接口。无论如何，在使用AIDL前，必须要理解如何绑定service——bindService。
 
-  AIDL开发步骤
+        AIDL开发步骤
 
-  AIDL接口文件，和普通的接口内容没有什么特别，只是它的扩展名为.aidl，保存在src目录下。如果其他应用程序需要IPC，则那些应用程序的src也要带有这个文件。Android SDK tools就会在gen目录自动生成一个IBinder接口文件。service必须适当地实现这个IBinder接口。那么客户端程序就能绑定这个service并在IPC时从IBinder调用方法。每个aidl文件只能定义一个接口，而且只能是接口的声明和方法的声明。
+        AIDL接口文件，和普通的接口内容没有什么特别，只是它的扩展名为.aidl，保存在src目录下。如果其他应用程序需要IPC，则那些应用程序的src也要带有这个文件。Android SDK tools就会在gen目录自动生成一个IBinder接口文件。service必须适当地实现这个IBinder接口。那么客户端程序就能绑定这个service并在IPC时从IBinder调用方法。每个aidl文件只能定义一个接口，而且只能是接口的声明和方法的声明。
 
-  换言之，AIDL文件的作用即是在任何需要跨进程调用的方法都需要声明在涉及的每一个服务或者进程中。
+        换言之，AIDL文件的作用即是在任何需要跨进程调用的方法都需要声明在涉及的每一个服务或者进程中。
 
-- service 生命周期
+-    service 生命周期
 
-  Service对象不能自己启动，需要通过某个Activity、Service或者其他Context对象来启动。启动的方法有两种，Context.startService和Context.bindService()。两种方式的生命周期是不同的，具体如下所示。
+        Service对象不能自己启动，需要通过某个Activity、Service或者其他Context对象来启动。启动的方法有两种，Context.startService和Context.bindService()。两种方式的生命周期是不同的，具体如下所示。
 
-  Context.startService方式的生命周期： 
-  启动时，startService –> onCreate() –> onStart() 
-  停止时，stopService –> onDestroy()
+        Context.startService方式的生命周期： 
+        启动时，startService –> onCreate() –> onStart() 
+        停止时，stopService –> onDestroy()
 
-  Context.bindService方式的生命周期： 
-  绑定时,bindService  -> onCreate() –> onBind() 
-  解绑定时,unbindService –>onUnbind() –> onDestory()
+        Context.bindService方式的生命周期： 
+        绑定时,bindService  -> onCreate() –> onBind() 
+        解绑定时,unbindService –>onUnbind() –> onDestory()
 
-- Java NIO  https://github.com/GeniusVJR/LearningNotes/blob/master/Part2/JavaConcurrent/NIO.md
+-    Java NIO  https://github.com/GeniusVJR/LearningNotes/blob/master/Part2/JavaConcurrent/NIO.md
 
-- srcoll 工作原理
+-    srcoll 工作原理
 
-  Scroller的工作原理：Scroller本身并不能实现view的滑动，它需要配合**view的computeScroll方法**才能完成弹性滑动的效果，它不断地让view重绘，而每一次重绘距滑动起始时间会有一个时间间隔，通过这个时间间隔Scroller就可以得出view的当前的滑动位置，知道了滑动位置就可以通过scrollTo方法来完成view的滑动。就这样，view的每一次重绘都会导致view进行小幅度的滑动，而多次的小幅度滑动就组成了弹性滑动，这就是Scroller的工作原理。
+        Scroller的工作原理：Scroller本身并不能实现view的滑动，它需要配合**view的computeScroll方法**才能完成弹性滑动的效果，它不断地让view重绘，而每一次重绘距滑动起始时间会有一个时间间隔，通过这个时间间隔Scroller就可以得出view的当前的滑动位置，知道了滑动位置就可以通过scrollTo方法来完成view的滑动。就这样，view的每一次重绘都会导致view进行小幅度的滑动，而多次的小幅度滑动就组成了弹性滑动，这就是Scroller的工作原理。
 
-- view 的滑动冲突的解决
+-    view 的滑动冲突的解决
 
-  (1)常见的滑动冲突的场景：
+        (1)常见的滑动冲突的场景：
 
-  1.外部滑动方向和内部滑动方向不一致，例如viewpager中包含listview；
+        1.外部滑动方向和内部滑动方向不一致，例如viewpager中包含listview；
 
-  2.外部滑动方向和内部滑动方向一致，例如viewpager的单页中存在可以滑动的bannerview；
+        2.外部滑动方向和内部滑动方向一致，例如viewpager的单页中存在可以滑动的bannerview；
 
-  3.上面两种情况的嵌套，例如viewpager的单个页面中包含了bannerview和listview。
+        3.上面两种情况的嵌套，例如viewpager的单个页面中包含了bannerview和listview。
 
-  (2)滑动冲突处理规则
+        (2)滑动冲突处理规则
 
-  可以根据滑动距离和水平方向形成的夹角；或者根绝水平和竖直方向滑动的距离差；或者两个方向上的速度差等
+        可以根据滑动距离和水平方向形成的夹角；或者根绝水平和竖直方向滑动的距离差；或者两个方向上的速度差等
 
-  (3)解决方式
+        (3)解决方式
 
-  1.外部拦截法：点击事件都先经过父容器的拦截处理，如果父容器需要此事件就拦截，如果不需要就不拦截。该方法需要重写父容器的`onInterceptTouchEvent`方法，在内部做相应的拦截即可，其他均不需要做修改。
+        1.外部拦截法：点击事件都先经过父容器的拦截处理，如果父容器需要此事件就拦截，如果不需要就不拦截。该方法需要重写父容器的`onInterceptTouchEvent`方法，在内部做相应的拦截即可，其他均不需要做修改。
 
-  2.内部拦截法：父容器不拦截任何事件，所有的事件都传递给子元素，如果子元素需要此事件就直接消耗掉，否则就交给父容器来处理。这种方法和Android中的事件分发机制不一致，需要配合`requestDisallowInterceptTouchEvent`方法才能正常工作。
+        2.内部拦截法：父容器不拦截任何事件，所有的事件都传递给子元素，如果子元素需要此事件就直接消耗掉，否则就交给父容器来处理。这种方法和Android中的事件分发机制不一致，需要配合`requestDisallowInterceptTouchEvent`方法才能正常工作。
 
-- HandlerThread 始终是一个 thread，如果是 thread 的话不能直接创建 handler，但是 handlerThread 不一样，它与一般的 thread 的 run 方法不一样，一般的 run 方法中是执行耗时操作，但是 handlerthread 中的 run 方法中执行的是 looper.prepare() 和 looper.loop() 方法，所以 可以在 handlerthread 中创建 handler。
+-    HandlerThread 始终是一个 thread，如果是 thread 的话不能直接创建 handler，但是 handlerThread 不一样，它与一般的 thread 的 run 方法不一样，一般的 run 方法中是执行耗时操作，但是 handlerthread 中的 run 方法中执行的是 looper.prepare() 和 looper.loop() 方法，所以 可以在 handlerthread 中创建 handler。
 
-- 属性动画
+-    属性动画
 
-  新引入的属性动画机制已经不再是针对于View来设计的了，也不限定于只能实现移动、缩放、旋转和淡入淡出这几种动画操作，同时也不再只是一种视觉上的动画效果了。它实际上是一种不断地对值进行操作的机制，并将值赋值到指定对象的指定属性上，可以是任意对象的任意属性。所以我们仍然可以将一个View进行移动或者缩放，但同时也可以对自定义View中的Point对象进行动画操作了。我们只需要告诉系统动画的运行时长，需要执行哪种类型的动画，以及动画的初始值和结束值，剩下的工作就可以全部交给系统去完成了。
+        新引入的属性动画机制已经不再是针对于View来设计的了，也不限定于只能实现移动、缩放、旋转和淡入淡出这几种动画操作，同时也不再只是一种视觉上的动画效果了。它实际上是一种不断地对值进行操作的机制，并将值赋值到指定对象的指定属性上，可以是任意对象的任意属性。所以我们仍然可以将一个View进行移动或者缩放，但同时也可以对自定义View中的Point对象进行动画操作了。我们只需要告诉系统动画的运行时长，需要执行哪种类型的动画，以及动画的初始值和结束值，剩下的工作就可以全部交给系统去完成了。
 
-  - valueanimator
-  - objectanimator
+     - valueanimator
+     - objectanimator
 
-- **APK 打包流程**
+-    **APK 打包流程**
 
-  1、打包资源文件，生成R.java文件
+        1、打包资源文件，生成R.java文件
 
-  2、处理aidl文件，生成相应java 文件
+        2、处理aidl文件，生成相应java 文件
 
-  3、编译工程源代码，生成相应class 文件
+        3、编译工程源代码，生成相应class 文件
 
-  4、转换所有class文件，生成classes.dex文件
+        4、转换所有class文件，生成classes.dex文件
 
-  5、打包生成apk
+        5、打包生成apk
 
-  6、对apk文件进行签名
+        6、对apk文件进行签名
 
-  7、对签名后的apk文件进行对其处理
+        7、对签名后的apk文件进行对其处理
 
-- Java 中的异常
+-    Java 中的异常
 
-  - **检查性异常：**最具代表的检查性异常是用户错误或问题引起的异常，这是程序员无法预见的。例如要打开一个不存在文件时，一个异常就发生了，这些异常在编译时不能被简单地忽略。
+     - **检查性异常：**最具代表的检查性异常是用户错误或问题引起的异常，这是程序员无法预见的。例如要打开一个不存在文件时，一个异常就发生了，这些异常在编译时不能被简单地忽略。
 
-  - **运行时异常：** 运行时异常是可能被程序员避免的异常。与检查性异常相反，运行时异常可以在编译时被忽略。
+     - **运行时异常：** 运行时异常是可能被程序员避免的异常。与检查性异常相反，运行时异常可以在编译时被忽略。
 
-  - **错误：** 错误不是异常，而是脱离程序员控制的问题。错误在代码中通常被忽略。例如，当栈溢出时，一个错误就发生了，它们在编译也检查不到的。
+     - **错误：** 错误不是异常，而是脱离程序员控制的问题。错误在代码中通常被忽略。例如，当栈溢出时，一个错误就发生了，它们在编译也检查不到的。
 
-  - finally 关键字用来创建在 try 代码块后面执行的代码块。
+     - finally 关键字用来创建在 try 代码块后面执行的代码块。
 
-    无论是否发生异常，finally 代码块中的代码总会被执行。
+       无论是否发生异常，finally 代码块中的代码总会被执行。
 
-    在 finally 代码块中，可以运行清理类型等收尾善后性质的语句。
+       在 finally 代码块中，可以运行清理类型等收尾善后性质的语句。
 
-  - **throws 用于抛出方法层次的异常**， 
-    并且直接由些方法调用异常处理类来处理该异常， 
-    所以它常用在方法的后面。比如 
-    public static void main(String[] args) throws SQLException
+     - **throws 用于抛出方法层次的异常**， 
+       并且直接由些方法调用异常处理类来处理该异常， 
+       所以它常用在方法的后面。比如 
+       public static void main(String[] args) throws SQLException
 
-    **throw 用于方法块里面的代码**，比throws的层次要低，比如try...catch ....语句块，表示它抛出异常， 
-    但它不会处理它， 而是由方法块的throws Exception来调用异常处理类来处理。
+       **throw 用于方法块里面的代码**，比throws的层次要低，比如try...catch ....语句块，表示它抛出异常， 
+       但它不会处理它， 而是由方法块的throws Exception来调用异常处理类来处理。
 
-    throw用在程序中，明确表示这里抛出一个异常。   
-    throws用在方法声明的地方，表示这个方法可能会抛出某异常。
+       throw用在程序中，明确表示这里抛出一个异常。   
+       throws用在方法声明的地方，表示这个方法可能会抛出某异常。
 
-    throw是抛出一个具体的异常类，产生一个异常。
-    throws则是在方法名后标出该方法会产生何种异常需要方法的使用者捕获并处理。
+       throw是抛出一个具体的异常类，产生一个异常。
+       throws则是在方法名后标出该方法会产生何种异常需要方法的使用者捕获并处理。
 
-- Butterknife 最新的实现原理，主要是利用 APT 在编译期生成相关代码  https://joyrun.github.io/2016/07/19/AptHelloWorld/
+-    Butterknife 最新的实现原理，主要是利用 APT 在编译期生成相关代码  https://joyrun.github.io/2016/07/19/AptHelloWorld/
 
-  APT(Annotation Processing Tool)是一种处理注释的工具,它对源代码文件进行检测找出其中的Annotation，使用Annotation进行额外的处理。
-  Annotation处理器在处理Annotation时可以根据源文件中的Annotation生成额外的源文件和其它的文件(文件具体内容由Annotation处理器的编写者决定),APT还会编译生成的源文件和原来的源文件，将它们一起生成class文件。
+        APT(Annotation Processing Tool)是一种处理注释的工具,它对源代码文件进行检测找出其中的Annotation，使用Annotation进行额外的处理。
+        Annotation处理器在处理Annotation时可以根据源文件中的Annotation生成额外的源文件和其它的文件(文件具体内容由Annotation处理器的编写者决定),APT还会编译生成的源文件和原来的源文件，将它们一起生成class文件。
 
-- otto 与 eventbus 出现的理由以及实现原理
+-    otto 与 eventbus 出现的理由以及实现原理
 
-  为了简化并且更加高质量的在Activities, Fragments, Threads, Services等等之间的通信，同时解决组建之间的高耦合还能继续高效的通信。事件总线设计出现了。
-  总线，在计算机组成原理中遇到过io总线。总线的思路就是负责传递某种object到指定的地方。
-  在Android内置的Intent和BroadcastReceiver就是采用了类似事件总线的设计思路。这两者都可以起到跟事件总线类似的效果。注册广播接收器和单纯发一个intent就可以唤起其他组件，提醒其他组件更新，这是非常方便的，同时也是本文提到的两个开源方案所做不到的。但也有不好地方，它们内部的实现都需要 IPC，单从传递效率上来讲，可能并不太适合上层的组件间通信。
+        为了简化并且更加高质量的在Activities, Fragments, Threads, Services等等之间的通信，同时解决组建之间的高耦合还能继续高效的通信。事件总线设计出现了。
+        总线，在计算机组成原理中遇到过io总线。总线的思路就是负责传递某种object到指定的地方。
+        在Android内置的Intent和BroadcastReceiver就是采用了类似事件总线的设计思路。这两者都可以起到跟事件总线类似的效果。注册广播接收器和单纯发一个intent就可以唤起其他组件，提醒其他组件更新，这是非常方便的，同时也是本文提到的两个开源方案所做不到的。但也有不好地方，它们内部的实现都需要 IPC，单从传递效率上来讲，可能并不太适合上层的组件间通信。
 
-- ContentProvider 的相关说法
+-    ContentProvider 的相关说法
 
-  **ContentProvider的作用** 1.封装数据：对数据进行封装，提供统一的接口 2.跨进程的数据共享
+        **ContentProvider的作用** 1.封装数据：对数据进行封装，提供统一的接口 2.跨进程的数据共享
 
-  **ContentProvider数据访问限制** android:exported 属性用于指示该服务是否能够被其他应用程序组件调用或跟它交互。如果设置为true，则能够被调用或交互。如果设置为false时，只有同一个应用程序的组件或带有相同用户ID的应用程序才能启动或绑定该服务。**对于需要开放的组件应设置合理的权限，如果只需要对同一个签名的其它应用开放content provider，则可以设置signature级别的权限。**
+        **ContentProvider数据访问限制** android:exported 属性用于指示该服务是否能够被其他应用程序组件调用或跟它交互。如果设置为true，则能够被调用或交互。如果设置为false时，只有同一个应用程序的组件或带有相同用户ID的应用程序才能启动或绑定该服务。**对于需要开放的组件应设置合理的权限，如果只需要对同一个签名的其它应用开放content provider，则可以设置signature级别的权限。**
 
-  **ContentProvider运行的进程和线程** ContentProvider可以在AndroidManifest.xml中配置一个叫做android:multiprocess 的属性，默认值是false，表示ContentProvider是单例的，无论哪个客户端应用的访问都将是同一个ContentProvider对象。如果设为true，系统会为每一个访问该ContentProvider的进程创建一个实例。
+        **ContentProvider运行的进程和线程** ContentProvider可以在AndroidManifest.xml中配置一个叫做android:multiprocess 的属性，默认值是false，表示ContentProvider是单例的，无论哪个客户端应用的访问都将是同一个ContentProvider对象。如果设为true，系统会为每一个访问该ContentProvider的进程创建一个实例。
 
-  问：每个ContentProvider的操作是在哪个线程中运行的呢（其实我们关心的是UI线程和工作线程）？比如我们在UI线程调用getContentResolver().query查询数据，而当数据量很大时（或者需要进行较长时间的计算）会不会阻塞UI线程呢？ 答：**ContentProvider和调用者在同一个进程，ContentProvider的方法（query/insert/update/delete等）和调用者在同一线程中；****ContentProvider和调用者在不同的进程，ContentProvider的方法会运行在它自身所在进程的一个Binder线程中。**
+        问：每个ContentProvider的操作是在哪个线程中运行的呢（其实我们关心的是UI线程和工作线程）？比如我们在UI线程调用getContentResolver().query查询数据，而当数据量很大时（或者需要进行较长时间的计算）会不会阻塞UI线程呢？ 答：**ContentProvider和调用者在同一个进程，ContentProvider的方法（query/insert/update/delete等）和调用者在同一线程中；****ContentProvider和调用者在不同的进程，ContentProvider的方法会运行在它自身所在进程的一个Binder线程中。**
 
-  问：ContentProvider是如何在不同应用程序之间传输数据的？ 答：**ContentResolver虽然是通过Binder进程间通信机制打通了应用程序之间共享数据的通道，但Content Provider组件在不同应用程序之间传输数据是基于匿名共享内存机制来实现的。**
+        问：ContentProvider是如何在不同应用程序之间传输数据的？ 答：**ContentResolver虽然是通过Binder进程间通信机制打通了应用程序之间共享数据的通道，但Content Provider组件在不同应用程序之间传输数据是基于匿名共享内存机制来实现的。**
 
-- SurfaceView与View的区别
+-    SurfaceView与View的区别
 
-  (1)View主要适用于主动更新的情况下，而SurfaceView主要适用于被动更新，例如频繁地刷新； (2)View在主线程中对画面进行刷新，而SurfaceView通常会通过一个子线程来进行页面刷新； (3)View在绘图时没有使用双缓冲机制，而SurfaceView在底层实现机制中就已经实现了双缓冲机制。
+        (1)View主要适用于主动更新的情况下，而SurfaceView主要适用于被动更新，例如频繁地刷新； (2)View在主线程中对画面进行刷新，而SurfaceView通常会通过一个子线程来进行页面刷新； (3)View在绘图时没有使用双缓冲机制，而SurfaceView在底层实现机制中就已经实现了双缓冲机制。
 
-- onPause、onRestart、onStop
+-    onPause、onStop
 
-  当系统即将恢复另一个activity的时候，此方法通常用于提交一些未保存的持久性数据，停止动画和一些可能会消耗CPU的东西，它应该尽一切可能快的完成，因为接下来的Activity在OnPause()返回之前不会被恢复。
+        onpause() **当系统即将恢复另一个activity的时候，此方法通常用于提交一些未保存的持久性数据**，停止动画和一些可能会消耗CPU的东西，它应该尽一切可能快的完成，因为接下来的Activity在OnPause()返回之前不会被恢复。
 
-  当activity不再对用户可见时调用此方法，这方法可能被调用，因为它即将被销毁，或者因为另外一个Activity（可能是一个已经存在的Activity或者一个新的Activity）已经被恢复然后覆盖了这个activity。
-  接下来如果这个activity 即将再次与用户交互（我觉得是再次对用户可见的意思），就会调用onRestart()方法，如果这个Activity即将死亡的话，就会调用onDestroy()方法。
+        onstop()  当activity不**再对用户可见时调用此方法**，这方法可能被调用，因为它即将被销毁，或者因为另外一个Activity（可能是一个已经存在的Activity或者一个新的Activity）已经被恢复然后覆盖了这个activity。
+        接下来如果这个activity 即将再次与用户交互（我觉得是再次对用户可见的意思），就会调用onRestart()方法，如果这个Activity即将死亡的话，就会调用onDestroy()方法。
 
-- java 创建匿名内部类的原因以及有什么作用
+-    java 创建匿名内部类的原因以及有什么作用
 
-  1、匿名内部类就是没有名字的内部类。这是Java为了方便我们编写程序而设计的一个机制。因为有时候有的内部类只需要创建一个它的对象就可以了，以后再不会用到这个类，这时候使用匿名内部类就比较合适，而且也免去了给它取名字的烦恼。
+        1、匿名内部类就是没有名字的内部类。这是Java为了方便我们编写程序而设计的一个机制。因为有时候有的内部类只需要创建一个它的对象就可以了，以后再不会用到这个类，这时候使用匿名内部类就比较合适，而且也免去了给它取名字的烦恼。
 
-  2、如果满足下面的一些条件，使用匿名内部类是比较合适的： 
-  ·只用到类的一个实例。 
-  ·类在定义后马上用到。 
-  ·类非常小（SUN推荐是在4行代码以下） 
-  ·给类命名并不会导致你的代码更容易被理解。 
-  在使用匿名内部类时，要记住以下几个原则： 
-  ·匿名内部类不能有构造方法。 
-  ·匿名内部类不能定义任何静态成员、方法和类。 
-  ·匿名内部类不能是public,protected,private,static。 
-  ·只能创建匿名内部类的一个实例。 
-  ·一个匿名内部类一定是在new的后面，用其隐含实现一个接口或实现一个类。 
-  ·因匿名内部类为局部内部类，所以局部内部类的所有限制都对其生效。 
+        2、如果满足下面的一些条件，使用匿名内部类是比较合适的： 
+        ·只用到类的一个实例。 
+        ·类在定义后马上用到。 
+        ·类非常小（SUN推荐是在4行代码以下） 
+        ·给类命名并不会导致你的代码更容易被理解。 
+        在使用匿名内部类时，要记住以下几个原则： 
+        ·匿名内部类不能有构造方法。 
+        ·匿名内部类不能定义任何静态成员、方法和类。 
+        ·匿名内部类不能是public,protected,private,static。 
+        ·只能创建匿名内部类的一个实例。 
+        ·一个匿名内部类一定是在new的后面，用其隐含实现一个接口或实现一个类。 
+        ·因匿名内部类为局部内部类，所以局部内部类的所有限制都对其生效。 
 
-- Service 能不能弹出 Dialog ？
+-    Service 能不能弹出 Dialog ？
 
-  一般情况下 Dialog 的显示必须要依附于 Window，但是有时候可以申请一些权限，来弹出系统级别的 Dialog，所以是可以实现的
+        一般情况下 Dialog 的显示必须要依附于 Window，但是有时候可以申请一些权限，来弹出系统级别的 Dialog，所以是可以实现的
 
-- WindowManager 的相关知识 
+-    WindowManager 的相关知识 
+
+        WindowManager主要用来管理窗口的一些状态、属性、view增加、删除、更新、窗口顺序、消息收集和处理等。
+
+        通过Context.getSystemService(Context.WINDOW_SERVICE)的方式可以获得WindowManager的实例.
+
+        WindowManager继承自ViewManager，里面涉及到窗口管理的三个重要方法，分别是：
+
+     * addView(); 
+     * updateViewLayout();
+     * removeView();  
+
+  在WindowManager中还有一个重要的静态类LayoutParams.通过它可以设置和获得当前窗口的一些属性。
+
+  我们先来看看addView()方法，在addView中，会利用LayoutParams获得window的View属性，并为每个window创建ViewRoot，ViewRoot是View和WindowManager之间的桥梁，真正把View传递给WindowManager的是通过ViewRoot的setView()方法，ViewRoot实现了View和WindowManager之间的消息传递。整个Android的窗口机制是基于一个叫做 WindowManager，这个接口可以添加view到屏幕，也可以从屏幕删除view。它面向的对象一端是屏幕，另一端就是View，直接忽略我们以前的Activity或者Dialog之类的东东。其实我们的Activity或者Diolog底层的实现也是通过WindowManager，这个 WindowManager是全局的，整个系统就是这个唯一的东东。它是显示View的最底层了。
+
+``` java
+   WindowManager mWm = (WindowManager)getSystemService(Context.WINDOW_SERVICE);
+          Button view = new Button(this);
+          view.setText("window manager test!");
+          WindowManager.LayoutParams mParams = new WindowManager.LayoutParams(); 
+          mWm.addView(view, mParams);
+```
+
+  我们这个button的显示和当前的运行环境基本上是无关的，当前是什么activity或者是桌面，使用这个底层的结果给你的编程带来很大的灵活性，但是要注意，显示出来就要销毁掉，这个是必须的，销毁其实就是一个remove。
 
 - 比较全的面试题 http://www.jianshu.com/p/13786463635d
 
@@ -1119,6 +1125,8 @@ public class Singleton {
 
 - webview 控件的使用
 
+  https://www.kymjs.com/code/2015/05/03/01/
+
 - 堆排序原理
 
 - 正则表达式
@@ -1145,6 +1153,38 @@ public class Singleton {
 
   1.虚拟机中没有泛型，只有普通类和普通方法,所有泛型类的类型参数在编译时都会被擦除,泛型类并没有自己独有的Class类对象。比如并不存在`List`.class或是`List.class`，而只有`List.class`。 2.创建泛型对象时请指明类型，让编译器尽早的做参数检查（**Effective Java，第23条：请不要在新代码中使用原生态类型**） 3.不要忽略编译器的警告信息，那意味着潜在的`ClassCastException`等着你。 4.静态变量是被泛型类的所有实例所共享的。对于声明为`MyClass`的类，访问其中的静态变量的方法仍然是 `MyClass.myStaticVar`。不管是通过`new MyClass`还是`new MyClass`创建的对象，都是共享一个静态变量。 5.泛型的类型参数不能用在`Java`异常处理的`catch`语句中。因为异常处理是由JVM在运行时刻来进行的。由于类型信息被擦除，`JVM`是无法区分两个异常类型`MyException`和`MyException`的。对于`JVM`来说，它们都是 `MyException`类型的。也就无法执行与异常对应的`catch`语句。
 
+  ``` java
+  class Apple<T extends Number>{
+      public T getSize() {
+          return size;
+      }
+
+      public void setSize(T size) {
+          this.size = size;
+      }
+
+      T size;
+      public Apple(){}
+      public Apple(T size){
+          this.size = size;
+      	}
+  	}
+  	public class ErasureTest {
+
+     	 public static void main(String args[]){
+          Apple<Integer> a = new Apple<>(6);
+          // a的getSize()方法返回 Integer对象
+          Integer as = a.getSize();
+          // 把a对象赋值给b，丢失尖括号里面的类型信息
+          Apple b = a;
+          // b只知道size的类型是number
+          Number size1 = b.getSize();
+          // 下面的代码出现编译错误
+          //  Integer size2 = b.getSize();
+      	}
+  }
+  ```
+
 - super 以及 extend 在泛型中的作用
 
   1) 参数写成：T<? super B>，对于这个泛型，?代表容器里的元素类型，由于只规定了元素必须是B的超类，导致元素没有明确统一的“根”（除了Object这个必然的根），所以这个泛型你其实无法使用它，对吧，除了把元素强制转成Object。所以，对把参数写成这样形态的函数，你函数体内，只能对这个泛型做**插入操作，而无法读**
@@ -1153,6 +1193,108 @@ public class Singleton {
 
   实际上，我们采用extends，super来扩展泛型的目的是为了弥补例如List<E>只能存放一种特定类型数据的不足，将其扩展为List<? extends E> 使其可以接收E的子类型中的任何一种类型元素，这样使它的使用范围更广。List<? super E>同理。
 
+- JVM 类加载机制过程
+
+  加载-->验证-->准备-->解析-->初始化-->使用-->卸载
+
+  加载： JVM基于启动类加载器、扩展类加载器、应用程序类加载器通过双亲委派模型进行类的加载，当然也可以继承。。。实现自定义的类加载。
+
+- Set里的元素是不能重复的，那么用什么方法来区分重复与否呢? 是用==还是equals()? 它们有何区别? 
+
+  Set里的元素是不能重复的，**那么用iterator()方法来区分重复与否**。equals()是判读两个Set是否相等。 
+  equals()和==方法决定引用值是否指向同一对象equals()在类中被覆盖，为的是当两个分离的对象的内容和类型相配的话，返回真值。 
+
+- Fragment 的生命周期写一下，onAttach 和 onDetach 的作用
+  **onAttach（）**：当Activity和Fragment交互的时候，我们可以在Activity中通过Fragment.setArguments()的方法为Fragment提供数据，然后再Fragment的onAttach（）方法中getArguments()获得一个Bundle对象。 
+  **onCreateView()**:创建该Fragment对应的视图，在这里你必须将创建的视图返回诶调用者。它跟onCreate（）的区别：onCreate()是指创建该Fragment，你可以在其中初始化除了View之外的东西。 
+  **onActivityCreated()** 
+  当Activity的onCreate()方法调用时，该方法被调用 
+  **onDetach()** 
+  当Fragment和Activity解除关联时调用该方法。
+
+- 哪些对象可以作为GC Roots？
+  ​    虚拟机栈（栈帧中的本地变量表）中的引用的对象
+  ​    方法区中的类静态属性引用的对象
+  ​    方法区中的常量引用的对象
+  ​    本地方法栈中JNI（Native方法）的引用对象
+
+- 三种GC之间的区别 Minor GC、Major GC 以及 Full GC 之间的区别
+
+  * Minor GC 每次启动时候都会清理年轻代的内存，发生的非常频繁
+  * Major GC 清理老年带的垃圾
+  * Full GC 是清理整个堆空间包含年轻代和老年代的垃圾
+
+- 内存分配策略
+
+  内存的分配，主要是在堆里面进行分配（也有可能经过JIT编译后被拆散为标量类型并间接地在栈上分配），堆里面主要是发生在新生代的Eden区中，少数情况下是在老年代中，分配的规则不是固定的，这需要根据当前使用的是哪种垃圾收集器组合还有虚拟机与内存相关的参数设置。
+
+  * 对象优先在Eden分配
+
+  大多数情况下，对象在新生代Eden区进行分配。当Eden区没有足够空间进行分配时JVM发生一次Minor GC。什么叫Minor GC呢？Minor GC是指发生在新生代的垃圾收集动作，因为Java对象大多具备朝生夕死的特性，所以Minor GC非常频繁，当然了，其回收速度肯定也是比较快的~，与之对应，还有个Full GC或者称为Major GC,是指老年代中的GC，经常会伴随一次Minor GC，Major GC速度一般会比Minor GC速度慢10倍以上！
+
+  * 大对象直接进入老年代
+
+  所谓的大对象，是指占用大量连续内存空间的Java对象。最经典的大对象就是那种很长的字符串和数组。大对象对于虚拟机来说是个坏消息~我们写程序时，尽量要避免出现一群朝生夕死的大对象。经常出现大对象容易导致内存还有不少空间时就得提前触发垃圾收集以获取足够的空间来存放大对象。
+
+  * 长期存活的对象将进入老年代
+
+  JVM采用分代收集思想来管理内存，就要去区分哪些是年轻的对象，哪些是老年的对象。我们知道，刚创建的对象肯定是年轻的对象，那么怎么将对象判断为老年呢？
+
+  在Eden区出生，并经过一次Minor GC后仍然存活，并且能被To Suvivor容纳，移动到To Suvivor区后，年龄设置为1。以后每经历一次Minor GC就将年龄加1，当它的年龄达到一个阀值（默认15，也可以更改-XX:MaxTenurinigThreshold来设置），就会被晋级到老年代中。
+
+  * 动态对象年龄判定
+
+  为了更好地适应不同程序内存情况，JVM并不一定是等到对象年龄达到阀值才将对象晋级到老年代。**如果在Survivor空间中的相同年龄的所有对象大小的总和大于Survivor空间的一半，年龄大于或等于该年的对象就可以直接进入老年代，无需等到指定的阀值**。这句话可能有点绕，不太好理解，我来再解释一下，就是说，假设Survivor的空间大小为max，年龄为y的对象总共有n个，如果y*n>max/2，那么所有年龄大于y的对象全部进入到老年代。
+
+  ​
+
+- Java 虚拟机运行时数据区域
+
+  ![](http://ww1.sinaimg.cn/large/006dXScfly1fd60l9j2ykj30kj09s43m)
+
+  *   程序计数器
+
+      一块小的内存空间，属于线程私有的，可以这样理解，当线程恢复线程需要一些记录信息，这就是他的作用，每条线程都有一个独立的程序计数器
+
+  *   Java 虚拟机栈
+
+      也是线程私有，就是传统意义上的栈。存储一些局部变量表，操作数栈，方法入口等等
+
+  *   本地方法栈
+
+      与虚拟机栈的作用非常相似，但是其执行的 Native 方法
+
+  *   Java 堆
+
+      是内存区域管理中最大的一块，其为线程贡献，垃圾回收的主要场所，不用必须在物理上连续
+
+  *   方法区
+
+      与 java 堆差不多，也是线程共享的内存区域，它用于已经被存储的类信息、常量、静态变量，习惯上被称为永久带。
+
+  *   运行时常量池
+
+- 在浏览器地址栏键入URL，按下回车之后发生的几个事件：
+
+      1）浏览器向DNS服务器请求解析该URL中的域名所对应的IP地址；
+
+      2）解析出IP地址后，根据该IP地址和默认端口80，和服务器建立TCP连接；
+
+      3）浏览器发出读取文件（URL中域名后面部分对应的文件）的HTTP请求，该请求报文作为TCP三次握手的第三个报文的数据发送给服务器；
+
+      4）服务器给出相应，把对应的html文本发送给浏览器；
+
+      5）释放TCP连接；
+
+      6）浏览器将该文本显示出来
+
+- 堆排序思想以及实现过程 http://www.jb51.net/article/86177.htm
+
+  **1.最大堆的算法思想是：**先将初始的R[0…n-1]建立成最大堆，此时是无序堆，而堆顶是最大元素
+  再将堆顶R[0]和无序区的最后一个记录R[n-1]交换，由此得到新的无序区R[0…n-2]和有序区R[n-1]，且满足R[0…n-2].keys ≤ R[n-1].key
+  由于交换后，前R[0…n-2]可能不满足最大堆的性质，因此再调整前R[0…n-2]为最大堆，直到只有R[0]最后一个元素才调整完成。
+  最大堆排序完成后，其实是升序序列，每次调整堆都是要得到最大的一个元素，然后与当前堆的最后一个元素交换，因此最后所得到的序列是升序序列。
+
 - view 动画(视图动画) 的缺点
 
   - 只针对 View 对象进行动画
@@ -1160,6 +1302,8 @@ public class Singleton {
   - 然后补间动画还有一个缺陷，就是它只能够实现移动、缩放、旋转和淡入淡出这四种动画操作
 
   - 就是它只是改变了View的显示效果而已，而不会真正去改变View的属性。什么意思呢？比如说，现在屏幕的左上角有一个按钮，然后我们通过补间动画将它移动到了屏幕的右下角，现在你可以去尝试点击一下这个按钮，点击事件是绝对不会触发的，因为实际上这个按钮还是停留在屏幕的左上角，只不过补间动画将这个按钮绘制到了屏幕的右
+
+    ​
 
     ​
 
