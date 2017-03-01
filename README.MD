@@ -272,12 +272,12 @@
 
 -   Java 注解的作用
 
-      a. 标记，用于告诉编译器一些信息b. 编译时动态处理，如动态生成代码 c. 运行时动态处理，如得到注解信息
-       标准 Annotation 元 Annotation 自定义 Annotation
+        a. 标记，用于告诉编译器一些信息b. 编译时动态处理，如动态生成代码 c. 运行时动态处理，如得到注解信息
+         标准 Annotation 元 Annotation 自定义 Annotation
 
 -   **有了解什么是IntentService么？**
 
-      intentService 是继承自 Service 并处理异步请求的一个类，在 IntentService 内有一个工作线程来处理耗时操作，当任务执行完后，IntentService 会自动停止，不需要我们去手动结束。如果启动 IntentService 多次，那么每一个耗时操作会以工作队列的方式在 IntentService 的 onHandleIntent 回调方法中执行，依次去执行，执行完自动结束。
+        intentService 是继承自 Service 并处理异步请求的一个类，在 IntentService 内有一个工作线程来处理耗时操作，当任务执行完后，IntentService 会自动停止，不需要我们去手动结束。如果启动 IntentService 多次，那么每一个耗时操作会以工作队列的方式在 IntentService 的 onHandleIntent 回调方法中执行，依次去执行，执行完自动结束。
 
 -   缓存算法的种类
 
@@ -295,13 +295,13 @@
 
 -   Java 如何进行 GC ，判断对象回收的条件是什么  http://www.jianshu.com/p/424e12b3a08f
 
-                JVM进行次GC的频率很高,但因为这种GC占用时间极短,所以对系统产生的影响不大。更值得关注的是主GC的触发条件,因为它对系统影响很明显。总的来说,有两个条件会触发主GC:
+                  JVM进行次GC的频率很高,但因为这种GC占用时间极短,所以对系统产生的影响不大。更值得关注的是主GC的触发条件,因为它对系统影响很明显。总的来说,有两个条件会触发主GC:
 
-                　　1：当应用程序空闲时,即没有应用线程在运行时,GC会被调用。因为GC在优先级最低的线程中进行,所以当应用忙时,GC线程就不会被调用,但以下条件除外。
+                  　　1：当应用程序空闲时,即没有应用线程在运行时,GC会被调用。因为GC在优先级最低的线程中进行,所以当应用忙时,GC线程就不会被调用,但以下条件除外。
 
-                　　2：Java堆内存不足时,GC会被调用。当应用线程在运行,并在运行过程中创建新对象,若这时内存空间不足,JVM就会强制地调用GC线程,以便回收内存用于新的分配。若GC一次之后仍不能满足内存分配的要求,JVM会再进行两次GC作进一步的尝试,若仍无法满足要求,则 JVM将报“out of memory”的错误,Java应用将停止。
+                  　　2：Java堆内存不足时,GC会被调用。当应用线程在运行,并在运行过程中创建新对象,若这时内存空间不足,JVM就会强制地调用GC线程,以便回收内存用于新的分配。若GC一次之后仍不能满足内存分配的要求,JVM会再进行两次GC作进一步的尝试,若仍无法满足要求,则 JVM将报“out of memory”的错误,Java应用将停止。
 
-                由于是否进行主GC由JVM根据系统环境决定,而系统环境在不断的变化当中,所以主GC的运行具有不确定性,无法预计它何时必然出现,但可以确定的是对一个长期运行的应用来说,其主GC是反复进行的。
+                  由于是否进行主GC由JVM根据系统环境决定,而系统环境在不断的变化当中,所以主GC的运行具有不确定性,无法预计它何时必然出现,但可以确定的是对一个长期运行的应用来说,其主GC是反复进行的。
 
 -   垃圾对象的判定即什么时候进行回收？
 
@@ -362,11 +362,11 @@
 
 -   Java 的内存模型
 
-      ​
+        ​
 
 -   内存泄露的原因是什么？内部类为什么会持有外部类的引用
 
-      内部类在构建时候，产生了 外部类名.this 的对象，从而导致依赖外部类。下面的实例是静态内部类和弱引用解决 handler 引起的内存泄漏。
+        内部类在构建时候，产生了 外部类名.this 的对象，从而导致依赖外部类。下面的实例是静态内部类和弱引用解决 handler 引起的内存泄漏。
 
 
     ​```java
@@ -405,7 +405,7 @@
 
 -   七种单列模式 http://wuchong.me/blog/2014/08/28/how-to-correctly-write-singleton-pattern/
 
-      一般来说，单例模式有五种写法：懒汉、饿汉、双重检验锁、静态内部类、枚举。下面这种是静态内部类机制。这种写法仍然使用JVM本身机制**保证了线程安全问题**；由于 SingletonHolder 是私有的，除了 getInstance() 之外没有办法访问它，**因此它是懒汉式的**；同时读取实例的时候不会进行同步，没有性能缺陷；也不依赖 JDK 版本。
+        一般来说，单例模式有五种写法：懒汉、饿汉、双重检验锁、静态内部类、枚举。下面这种是静态内部类机制。这种写法仍然使用JVM本身机制**保证了线程安全问题**；由于 SingletonHolder 是私有的，除了 getInstance() 之外没有办法访问它，**因此它是懒汉式的**；同时读取实例的时候不会进行同步，没有性能缺陷；也不依赖 JDK 版本。
 
 
 ```java
@@ -446,11 +446,11 @@ public class Singleton {
 
 -   Exception
 
-      `Exception`类及其子类是`Throwable`的一种形式，它**指出了合理的应用程序想要捕获的条件**。对于可以恢复的条件使用被检查异常（Exception的子类中除了`RuntimeException`之外的其它子类），对于程序错误使用运行时异常。
+        `Exception`类及其子类是`Throwable`的一种形式，它**指出了合理的应用程序想要捕获的条件**。对于可以恢复的条件使用被检查异常（Exception的子类中除了`RuntimeException`之外的其它子类），对于程序错误使用运行时异常。
 
 -   static 关键字
 
-      在程序中任何变量或者代码都是在编译时由系统自动分配内存来存储的。`static`修饰符表示静态的，在类加载时`JVM`**会把它放到方法区，被本类以及本类的所有实例所共用**。在编译后所分配的内存会一直存在，直到程序退出内存才会释放这个空间。如果一个被所有实例共用的方法被申明为`static`，那么就可以节省空间，不用每个实例初始化的时候都被分配到内存。我们比较常见的`static`修饰是在静态变量和静态方法中。它们可以直接通过类名来访问。
+        在程序中任何变量或者代码都是在编译时由系统自动分配内存来存储的。`static`修饰符表示静态的，在类加载时`JVM`**会把它放到方法区，被本类以及本类的所有实例所共用**。在编译后所分配的内存会一直存在，直到程序退出内存才会释放这个空间。如果一个被所有实例共用的方法被申明为`static`，那么就可以节省空间，不用每个实例初始化的时候都被分配到内存。我们比较常见的`static`修饰是在静态变量和静态方法中。它们可以直接通过类名来访问。
 
 -   wait() 和sleep() 之间的区别
 
@@ -883,11 +883,11 @@ public class Singleton {
 
 -    如何解决 GC 循环引用带来的问题
 
-        GC root，几乎所有的 jvm 都是采用引用遍历的方法来解决循环引用潜在的问题
+           GC root，几乎所有的 jvm 都是采用引用遍历的方法来解决循环引用潜在的问题
 
 -    TCP 如何保证传输可靠
 
-        有超时重传机制，丢失重传机制
+           有超时重传机制，丢失重传机制
 
 -    什么是三级缓存
 
@@ -906,82 +906,82 @@ public class Singleton {
 
 -    AIDL 机制，其实就是 android 中的 ipc 机制
 
-        所谓AIDL：Android Interface Definition Language，是一种Android接口定义语言，用于编写Android进程间通信代码。也就是说AIDL只是一个实现进程间通信的一个工具，真正实现Android进程间通信机制的其实是幕后“主谋”Binder机制。所有有关AIDL实现进程间通信都是依赖于Android的Binder机制，那么这个Binder机制到底是个什么东西呢？
+           所谓AIDL：Android Interface Definition Language，是一种Android接口定义语言，用于编写Android进程间通信代码。也就是说AIDL只是一个实现进程间通信的一个工具，真正实现Android进程间通信机制的其实是幕后“主谋”Binder机制。所有有关AIDL实现进程间通信都是依赖于Android的Binder机制，那么这个Binder机制到底是个什么东西呢？
 
-        AIDL适用场景
+           AIDL适用场景
 
-        官方文档特别提醒我们何时使用AIDL是必要的：只有你允许客户端从不同的应用程序为了进程间的通信而去访问你的service，以及想在你的service处理多线程。具体的不同场景下的AIDL设计规则如下：
+           官方文档特别提醒我们何时使用AIDL是必要的：只有你允许客户端从不同的应用程序为了进程间的通信而去访问你的service，以及想在你的service处理多线程。具体的不同场景下的AIDL设计规则如下：
 
-        如果不需要进行不同应用程序间的并发通信(IPC)，通过实现一个Binder对象来创建接口；或者你想进行IPC，但不需要处理多线程的，则使用Messenger对象来创建接口。无论如何，在使用AIDL前，必须要理解如何绑定service——bindService。
+           如果不需要进行不同应用程序间的并发通信(IPC)，通过实现一个Binder对象来创建接口；或者你想进行IPC，但不需要处理多线程的，则使用Messenger对象来创建接口。无论如何，在使用AIDL前，必须要理解如何绑定service——bindService。
 
-        AIDL开发步骤
+           AIDL开发步骤
 
-        AIDL接口文件，和普通的接口内容没有什么特别，只是它的扩展名为.aidl，保存在src目录下。如果其他应用程序需要IPC，则那些应用程序的src也要带有这个文件。Android SDK tools就会在gen目录自动生成一个IBinder接口文件。service必须适当地实现这个IBinder接口。那么客户端程序就能绑定这个service并在IPC时从IBinder调用方法。每个aidl文件只能定义一个接口，而且只能是接口的声明和方法的声明。
+           AIDL接口文件，和普通的接口内容没有什么特别，只是它的扩展名为.aidl，保存在src目录下。如果其他应用程序需要IPC，则那些应用程序的src也要带有这个文件。Android SDK tools就会在gen目录自动生成一个IBinder接口文件。service必须适当地实现这个IBinder接口。那么客户端程序就能绑定这个service并在IPC时从IBinder调用方法。每个aidl文件只能定义一个接口，而且只能是接口的声明和方法的声明。
 
-        换言之，AIDL文件的作用即是在任何需要跨进程调用的方法都需要声明在涉及的每一个服务或者进程中。
+           换言之，AIDL文件的作用即是在任何需要跨进程调用的方法都需要声明在涉及的每一个服务或者进程中。
 
 -    service 生命周期
 
-        Service对象不能自己启动，需要通过某个Activity、Service或者其他Context对象来启动。启动的方法有两种，Context.startService和Context.bindService()。两种方式的生命周期是不同的，具体如下所示。
+           Service对象不能自己启动，需要通过某个Activity、Service或者其他Context对象来启动。启动的方法有两种，Context.startService和Context.bindService()。两种方式的生命周期是不同的，具体如下所示。
 
-        Context.startService方式的生命周期： 
-        启动时，startService –> onCreate() –> onStart() 
-        停止时，stopService –> onDestroy()
-
-        Context.bindService方式的生命周期： 
-        绑定时,bindService  -> onCreate() –> onBind() 
-        解绑定时,unbindService –>onUnbind() –> onDestory()
+           Context.startService方式的生命周期： 
+           启动时，startService –> onCreate() –> onStart() 
+           停止时，stopService –> onDestroy()
+         
+           Context.bindService方式的生命周期： 
+           绑定时,bindService  -> onCreate() –> onBind() 
+           解绑定时,unbindService –>onUnbind() –> onDestory()
 
 -    Java NIO  https://github.com/GeniusVJR/LearningNotes/blob/master/Part2/JavaConcurrent/NIO.md
 
 -    srcoll 工作原理
 
-        Scroller的工作原理：Scroller本身并不能实现view的滑动，它需要配合**view的computeScroll方法**才能完成弹性滑动的效果，它不断地让view重绘，而每一次重绘距滑动起始时间会有一个时间间隔，通过这个时间间隔Scroller就可以得出view的当前的滑动位置，知道了滑动位置就可以通过scrollTo方法来完成view的滑动。就这样，view的每一次重绘都会导致view进行小幅度的滑动，而多次的小幅度滑动就组成了弹性滑动，这就是Scroller的工作原理。
+           Scroller的工作原理：Scroller本身并不能实现view的滑动，它需要配合**view的computeScroll方法**才能完成弹性滑动的效果，它不断地让view重绘，而每一次重绘距滑动起始时间会有一个时间间隔，通过这个时间间隔Scroller就可以得出view的当前的滑动位置，知道了滑动位置就可以通过scrollTo方法来完成view的滑动。就这样，view的每一次重绘都会导致view进行小幅度的滑动，而多次的小幅度滑动就组成了弹性滑动，这就是Scroller的工作原理。
 
 -    view 的滑动冲突的解决
 
-        (1)常见的滑动冲突的场景：
+           (1)常见的滑动冲突的场景：
 
-        1.外部滑动方向和内部滑动方向不一致，例如viewpager中包含listview；
+           1.外部滑动方向和内部滑动方向不一致，例如viewpager中包含listview；
 
-        2.外部滑动方向和内部滑动方向一致，例如viewpager的单页中存在可以滑动的bannerview；
+           2.外部滑动方向和内部滑动方向一致，例如viewpager的单页中存在可以滑动的bannerview；
 
-        3.上面两种情况的嵌套，例如viewpager的单个页面中包含了bannerview和listview。
+           3.上面两种情况的嵌套，例如viewpager的单个页面中包含了bannerview和listview。
 
-        (2)滑动冲突处理规则
+           (2)滑动冲突处理规则
 
-        可以根据滑动距离和水平方向形成的夹角；或者根绝水平和竖直方向滑动的距离差；或者两个方向上的速度差等
+           可以根据滑动距离和水平方向形成的夹角；或者根绝水平和竖直方向滑动的距离差；或者两个方向上的速度差等
 
-        (3)解决方式
+           (3)解决方式
 
-        1.外部拦截法：点击事件都先经过父容器的拦截处理，如果父容器需要此事件就拦截，如果不需要就不拦截。该方法需要重写父容器的`onInterceptTouchEvent`方法，在内部做相应的拦截即可，其他均不需要做修改。
+           1.外部拦截法：点击事件都先经过父容器的拦截处理，如果父容器需要此事件就拦截，如果不需要就不拦截。该方法需要重写父容器的`onInterceptTouchEvent`方法，在内部做相应的拦截即可，其他均不需要做修改。
 
-        2.内部拦截法：父容器不拦截任何事件，所有的事件都传递给子元素，如果子元素需要此事件就直接消耗掉，否则就交给父容器来处理。这种方法和Android中的事件分发机制不一致，需要配合`requestDisallowInterceptTouchEvent`方法才能正常工作。
+           2.内部拦截法：父容器不拦截任何事件，所有的事件都传递给子元素，如果子元素需要此事件就直接消耗掉，否则就交给父容器来处理。这种方法和Android中的事件分发机制不一致，需要配合`requestDisallowInterceptTouchEvent`方法才能正常工作。
 
 -    HandlerThread 始终是一个 thread，如果是 thread 的话不能直接创建 handler，但是 handlerThread 不一样，它与一般的 thread 的 run 方法不一样，一般的 run 方法中是执行耗时操作，但是 handlerthread 中的 run 方法中执行的是 looper.prepare() 和 looper.loop() 方法，所以 可以在 handlerthread 中创建 handler。
 
 -    属性动画
 
-        新引入的属性动画机制已经不再是针对于View来设计的了，也不限定于只能实现移动、缩放、旋转和淡入淡出这几种动画操作，同时也不再只是一种视觉上的动画效果了。它实际上是一种不断地对值进行操作的机制，并将值赋值到指定对象的指定属性上，可以是任意对象的任意属性。所以我们仍然可以将一个View进行移动或者缩放，但同时也可以对自定义View中的Point对象进行动画操作了。我们只需要告诉系统动画的运行时长，需要执行哪种类型的动画，以及动画的初始值和结束值，剩下的工作就可以全部交给系统去完成了。
+           新引入的属性动画机制已经不再是针对于View来设计的了，也不限定于只能实现移动、缩放、旋转和淡入淡出这几种动画操作，同时也不再只是一种视觉上的动画效果了。它实际上是一种不断地对值进行操作的机制，并将值赋值到指定对象的指定属性上，可以是任意对象的任意属性。所以我们仍然可以将一个View进行移动或者缩放，但同时也可以对自定义View中的Point对象进行动画操作了。我们只需要告诉系统动画的运行时长，需要执行哪种类型的动画，以及动画的初始值和结束值，剩下的工作就可以全部交给系统去完成了。
 
      - valueanimator
      - objectanimator
 
 -    **APK 打包流程**
 
-        1、打包资源文件，生成R.java文件
+           1、打包资源文件，生成R.java文件
 
-        2、处理aidl文件，生成相应java 文件
+           2、处理aidl文件，生成相应java 文件
 
-        3、编译工程源代码，生成相应class 文件
+           3、编译工程源代码，生成相应class 文件
 
-        4、转换所有class文件，生成classes.dex文件
+           4、转换所有class文件，生成classes.dex文件
 
-        5、打包生成apk
+           5、打包生成apk
 
-        6、对apk文件进行签名
+           6、对apk文件进行签名
 
-        7、对签名后的apk文件进行对其处理
+           7、对签名后的apk文件进行对其处理
 
 -    Java 中的异常
 
@@ -1013,66 +1013,66 @@ public class Singleton {
 
 -    Butterknife 最新的实现原理，主要是利用 APT 在编译期生成相关代码  https://joyrun.github.io/2016/07/19/AptHelloWorld/
 
-        APT(Annotation Processing Tool)是一种处理注释的工具,它对源代码文件进行检测找出其中的Annotation，使用Annotation进行额外的处理。
-        Annotation处理器在处理Annotation时可以根据源文件中的Annotation生成额外的源文件和其它的文件(文件具体内容由Annotation处理器的编写者决定),APT还会编译生成的源文件和原来的源文件，将它们一起生成class文件。
+           APT(Annotation Processing Tool)是一种处理注释的工具,它对源代码文件进行检测找出其中的Annotation，使用Annotation进行额外的处理。
+           Annotation处理器在处理Annotation时可以根据源文件中的Annotation生成额外的源文件和其它的文件(文件具体内容由Annotation处理器的编写者决定),APT还会编译生成的源文件和原来的源文件，将它们一起生成class文件。
 
 -    otto 与 eventbus 出现的理由以及实现原理
 
-        为了简化并且更加高质量的在Activities, Fragments, Threads, Services等等之间的通信，同时解决组建之间的高耦合还能继续高效的通信。事件总线设计出现了。
-        总线，在计算机组成原理中遇到过io总线。总线的思路就是负责传递某种object到指定的地方。
-        在Android内置的Intent和BroadcastReceiver就是采用了类似事件总线的设计思路。这两者都可以起到跟事件总线类似的效果。注册广播接收器和单纯发一个intent就可以唤起其他组件，提醒其他组件更新，这是非常方便的，同时也是本文提到的两个开源方案所做不到的。但也有不好地方，它们内部的实现都需要 IPC，单从传递效率上来讲，可能并不太适合上层的组件间通信。
+           为了简化并且更加高质量的在Activities, Fragments, Threads, Services等等之间的通信，同时解决组建之间的高耦合还能继续高效的通信。事件总线设计出现了。
+           总线，在计算机组成原理中遇到过io总线。总线的思路就是负责传递某种object到指定的地方。
+           在Android内置的Intent和BroadcastReceiver就是采用了类似事件总线的设计思路。这两者都可以起到跟事件总线类似的效果。注册广播接收器和单纯发一个intent就可以唤起其他组件，提醒其他组件更新，这是非常方便的，同时也是本文提到的两个开源方案所做不到的。但也有不好地方，它们内部的实现都需要 IPC，单从传递效率上来讲，可能并不太适合上层的组件间通信。
 
 -    ContentProvider 的相关说法
 
-        **ContentProvider的作用** 1.封装数据：对数据进行封装，提供统一的接口 2.跨进程的数据共享
+           **ContentProvider的作用** 1.封装数据：对数据进行封装，提供统一的接口 2.跨进程的数据共享
 
-        **ContentProvider数据访问限制** android:exported 属性用于指示该服务是否能够被其他应用程序组件调用或跟它交互。如果设置为true，则能够被调用或交互。如果设置为false时，只有同一个应用程序的组件或带有相同用户ID的应用程序才能启动或绑定该服务。**对于需要开放的组件应设置合理的权限，如果只需要对同一个签名的其它应用开放content provider，则可以设置signature级别的权限。**
+           **ContentProvider数据访问限制** android:exported 属性用于指示该服务是否能够被其他应用程序组件调用或跟它交互。如果设置为true，则能够被调用或交互。如果设置为false时，只有同一个应用程序的组件或带有相同用户ID的应用程序才能启动或绑定该服务。**对于需要开放的组件应设置合理的权限，如果只需要对同一个签名的其它应用开放content provider，则可以设置signature级别的权限。**
 
-        **ContentProvider运行的进程和线程** ContentProvider可以在AndroidManifest.xml中配置一个叫做android:multiprocess 的属性，默认值是false，表示ContentProvider是单例的，无论哪个客户端应用的访问都将是同一个ContentProvider对象。如果设为true，系统会为每一个访问该ContentProvider的进程创建一个实例。
+           **ContentProvider运行的进程和线程** ContentProvider可以在AndroidManifest.xml中配置一个叫做android:multiprocess 的属性，默认值是false，表示ContentProvider是单例的，无论哪个客户端应用的访问都将是同一个ContentProvider对象。如果设为true，系统会为每一个访问该ContentProvider的进程创建一个实例。
 
-        问：每个ContentProvider的操作是在哪个线程中运行的呢（其实我们关心的是UI线程和工作线程）？比如我们在UI线程调用getContentResolver().query查询数据，而当数据量很大时（或者需要进行较长时间的计算）会不会阻塞UI线程呢？ 答：**ContentProvider和调用者在同一个进程，ContentProvider的方法（query/insert/update/delete等）和调用者在同一线程中；****ContentProvider和调用者在不同的进程，ContentProvider的方法会运行在它自身所在进程的一个Binder线程中。**
+           问：每个ContentProvider的操作是在哪个线程中运行的呢（其实我们关心的是UI线程和工作线程）？比如我们在UI线程调用getContentResolver().query查询数据，而当数据量很大时（或者需要进行较长时间的计算）会不会阻塞UI线程呢？ 答：**ContentProvider和调用者在同一个进程，ContentProvider的方法（query/insert/update/delete等）和调用者在同一线程中；****ContentProvider和调用者在不同的进程，ContentProvider的方法会运行在它自身所在进程的一个Binder线程中。**
 
-        问：ContentProvider是如何在不同应用程序之间传输数据的？ 答：**ContentResolver虽然是通过Binder进程间通信机制打通了应用程序之间共享数据的通道，但Content Provider组件在不同应用程序之间传输数据是基于匿名共享内存机制来实现的。**
+           问：ContentProvider是如何在不同应用程序之间传输数据的？ 答：**ContentResolver虽然是通过Binder进程间通信机制打通了应用程序之间共享数据的通道，但Content Provider组件在不同应用程序之间传输数据是基于匿名共享内存机制来实现的。**
 
 -    SurfaceView与View的区别
 
-        (1)View主要适用于主动更新的情况下，而SurfaceView主要适用于被动更新，例如频繁地刷新； (2)View在主线程中对画面进行刷新，而SurfaceView通常会通过一个子线程来进行页面刷新； (3)View在绘图时没有使用双缓冲机制，而SurfaceView在底层实现机制中就已经实现了双缓冲机制。
+           (1)View主要适用于主动更新的情况下，而SurfaceView主要适用于被动更新，例如频繁地刷新； (2)View在主线程中对画面进行刷新，而SurfaceView通常会通过一个子线程来进行页面刷新； (3)View在绘图时没有使用双缓冲机制，而SurfaceView在底层实现机制中就已经实现了双缓冲机制。
 
 -    onPause、onStop
 
-        onpause() **当系统即将恢复另一个activity的时候，此方法通常用于提交一些未保存的持久性数据**，停止动画和一些可能会消耗CPU的东西，它应该尽一切可能快的完成，因为接下来的Activity在OnPause()返回之前不会被恢复。
+           onpause() **当系统即将恢复另一个activity的时候，此方法通常用于提交一些未保存的持久性数据**，停止动画和一些可能会消耗CPU的东西，它应该尽一切可能快的完成，因为接下来的Activity在OnPause()返回之前不会被恢复。
 
-        onstop()  当activity不**再对用户可见时调用此方法**，这方法可能被调用，因为它即将被销毁，或者因为另外一个Activity（可能是一个已经存在的Activity或者一个新的Activity）已经被恢复然后覆盖了这个activity。
-        接下来如果这个activity 即将再次与用户交互（我觉得是再次对用户可见的意思），就会调用onRestart()方法，如果这个Activity即将死亡的话，就会调用onDestroy()方法。
+           onstop()  当activity不**再对用户可见时调用此方法**，这方法可能被调用，因为它即将被销毁，或者因为另外一个Activity（可能是一个已经存在的Activity或者一个新的Activity）已经被恢复然后覆盖了这个activity。
+           接下来如果这个activity 即将再次与用户交互（我觉得是再次对用户可见的意思），就会调用onRestart()方法，如果这个Activity即将死亡的话，就会调用onDestroy()方法。
 
 -    java 创建匿名内部类的原因以及有什么作用
 
-        1、匿名内部类就是没有名字的内部类。这是Java为了方便我们编写程序而设计的一个机制。因为有时候有的内部类只需要创建一个它的对象就可以了，以后再不会用到这个类，这时候使用匿名内部类就比较合适，而且也免去了给它取名字的烦恼。
+           1、匿名内部类就是没有名字的内部类。这是Java为了方便我们编写程序而设计的一个机制。因为有时候有的内部类只需要创建一个它的对象就可以了，以后再不会用到这个类，这时候使用匿名内部类就比较合适，而且也免去了给它取名字的烦恼。
 
-        2、如果满足下面的一些条件，使用匿名内部类是比较合适的： 
-        ·只用到类的一个实例。 
-        ·类在定义后马上用到。 
-        ·类非常小（SUN推荐是在4行代码以下） 
-        ·给类命名并不会导致你的代码更容易被理解。 
-        在使用匿名内部类时，要记住以下几个原则： 
-        ·匿名内部类不能有构造方法。 
-        ·匿名内部类不能定义任何静态成员、方法和类。 
-        ·匿名内部类不能是public,protected,private,static。 
-        ·只能创建匿名内部类的一个实例。 
-        ·一个匿名内部类一定是在new的后面，用其隐含实现一个接口或实现一个类。 
-        ·因匿名内部类为局部内部类，所以局部内部类的所有限制都对其生效。 
+           2、如果满足下面的一些条件，使用匿名内部类是比较合适的： 
+           ·只用到类的一个实例。 
+           ·类在定义后马上用到。 
+           ·类非常小（SUN推荐是在4行代码以下） 
+           ·给类命名并不会导致你的代码更容易被理解。 
+           在使用匿名内部类时，要记住以下几个原则： 
+           ·匿名内部类不能有构造方法。 
+           ·匿名内部类不能定义任何静态成员、方法和类。 
+           ·匿名内部类不能是public,protected,private,static。 
+           ·只能创建匿名内部类的一个实例。 
+           ·一个匿名内部类一定是在new的后面，用其隐含实现一个接口或实现一个类。 
+           ·因匿名内部类为局部内部类，所以局部内部类的所有限制都对其生效。 
 
 -    Service 能不能弹出 Dialog ？
 
-        一般情况下 Dialog 的显示必须要依附于 Window，但是有时候可以申请一些权限，来弹出系统级别的 Dialog，所以是可以实现的
+           一般情况下 Dialog 的显示必须要依附于 Window，但是有时候可以申请一些权限，来弹出系统级别的 Dialog，所以是可以实现的
 
 -    WindowManager 的相关知识 
 
-        WindowManager主要用来管理窗口的一些状态、属性、view增加、删除、更新、窗口顺序、消息收集和处理等。
+           WindowManager主要用来管理窗口的一些状态、属性、view增加、删除、更新、窗口顺序、消息收集和处理等。
 
-        通过Context.getSystemService(Context.WINDOW_SERVICE)的方式可以获得WindowManager的实例.
+           通过Context.getSystemService(Context.WINDOW_SERVICE)的方式可以获得WindowManager的实例.
 
-        WindowManager继承自ViewManager，里面涉及到窗口管理的三个重要方法，分别是：
+           WindowManager继承自ViewManager，里面涉及到窗口管理的三个重要方法，分别是：
 
      * addView(); 
      * updateViewLayout();
@@ -1097,6 +1097,10 @@ public class Singleton {
 - 单利模式双重判断是否为空以及加上两种锁的原因
 
   强烈推荐 http://www.jianshu.com/p/4586cb11c62d
+
+  为什么要两次判断是否为 null？联想第三个线程过来取 instance 实例的时候，instance 还未实例化好。因为 JMM在创建对象时候分这个三部：1：分配对象的内存空间 2：初始化对象 3：设置 instance 指向刚分配的内存地址。第三个步骤和第二个步骤依赖于第一行执行结果，存在数据依赖性，但是第二和第三之间却没有。**但是第2行和第3行却不存在数据依赖性，这里可能会发生重排序！**
+
+  也就是说第3行可能会优先于第2行执行，先设置instance指向内存地址，此时instance就!=null；然后再初始化对象。如果初始化对象耗时较长，在还没有初始化完成时，线程C访问getInstance方法，在第5行会判断到instance!=null，直接返回未初始化完成的instance实例对象。故而我们用 volatile 关键字来解决这个问题，第一个禁止指令重新排序，第二个及时刷新一个变量对于线程的可见性。
 
 - 理解 Java 垃圾回收机制
 
@@ -1258,19 +1262,19 @@ public class Singleton {
 
   *   Java 虚拟机栈
 
-      也是线程私有，就是传统意义上的栈。存储一些局部变量表，操作数栈，方法入口等等
+        也是线程私有，就是传统意义上的栈。存储一些局部变量表，操作数栈，方法入口等等
 
   *   本地方法栈
 
-      与虚拟机栈的作用非常相似，但是其执行的 Native 方法
+        与虚拟机栈的作用非常相似，但是其执行的 Native 方法
 
   *   Java 堆
 
-      是内存区域管理中最大的一块，其为线程贡献，垃圾回收的主要场所，不用必须在物理上连续
+        是内存区域管理中最大的一块，其为线程贡献，垃圾回收的主要场所，不用必须在物理上连续
 
   *   方法区
 
-      与 java 堆差不多，也是线程共享的内存区域，它用于已经被存储的类信息、常量、静态变量，习惯上被称为永久带。
+        与 java 堆差不多，也是线程共享的内存区域，它用于已经被存储的类信息、常量、静态变量，习惯上被称为永久带。
 
   *   运行时常量池
 
