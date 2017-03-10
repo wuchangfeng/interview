@@ -1,21 +1,6 @@
 
-* 详细叙述事件分发机制
 
-* View 的绘制过程
 
-  View 系统的绘制流程从 ViewRoot 的 performTraversal() 方法开始，再其 内部调用 view 的 measure 方法，其接受两个参数
-  ，widthMeasureSpec 和 heightMeasureSpec ，分别用来确实能视图的规格和大小。
-
-  MeasureSpec 是由 specSize 和 specMode 共同组成的，前面的用来记录大小后面的用来记录规格。
-  * EXACTLY 表示父视图希望自视图的大小应该是有 specSize 的值来确定的，，可以重写
-  * AT_MOST 表示自视图最多只能是 specSize 中指定的大小。
-  * UNSPECIFILED 可以设置成任何大小
-
-  父视图传递宽高两个数值给子视图，说明父视图一定程度上决定了子视图的大小。个界面的展示可能会涉及到很多次的measure，因为一个布局中一般都会包含多个子视图，每个视图都需要经历一次measure过程。ViewGroup中定义了一个measureChildren()方法来去测量子视图的大小，
-
-  后面就是 onLayout() 主要根据上面测量的几个参数决定位置的布局。注意 ViewGroup 中的 onLayout() 是一个抽象方法，各种布局文件可以根据需要来重写。
-
-  最后就是 onDraw() 
 
 * Glide 的优势
 
@@ -69,8 +54,8 @@
 
 * 说说Service的生命周期？
   
+  启动Service的方式有两种，各自的生命周期也有所不同。
   * 通过startService启动Service：onCreate、onStartCommand、onDestory。
-
   * 通过bindService绑定Service：onCreate、onBind、onUnbind、onDestory。
 
 
@@ -306,6 +291,9 @@
   * Bitmap 以及线程优化
 
 
+
+
+
 - Httpclient 与 httpurlclient 之间的区别
 
   Http Client适用于web浏览器，拥有大量灵活的API，实现起来比较稳定，且其功能比较丰富，提供了很多工具，封装了http的请求头，参数，内容体，响应，还有一些高级功能，代理、COOKIE、鉴权、压缩、连接池的处理。正是因为如此，API 比较多难以修改，android 在 6.0 中抛弃了它，转而用 okhttp
@@ -522,6 +510,20 @@
 
   也就是说第3行可能会优先于第2行执行，先设置instance指向内存地址，此时instance就!=null；然后再初始化对象。如果初始化对象耗时较长，在还没有初始化完成时，线程C访问getInstance方法，在第5行会判断到instance!=null，直接返回未初始化完成的instance实例对象。故而我们用 volatile 关键字来解决这个问题，第一个禁止指令重新排序，第二个及时刷新一个变量对于线程的可见性。
   
+
+- 位操作
+
+  ![](http://ww1.sinaimg.cn/large/b10d1ea5ly1fd3pf13bobj20mj04uq2z)
+
+- webview 控件的使用
+
+  https://www.kymjs.com/code/2015/05/03/01/
+
+  ​
+
+- 正则表达式
+
+
 
 - 泛型擦除 http://wiki.jikexueyuan.com/project/java-vm/syntactic-sugar.html
 
@@ -802,6 +804,7 @@
   - onDestroyView()：Fragment的View移除时被调用
   - onDetach()：Fragment与宿主Activity解绑的时候被调用
 
+- Activity 的生命周期详解 http://ezio.farbox.com/post/android-activity
 
 - ConcurrenthasnMap 的原理分析
 
@@ -882,7 +885,7 @@
 
   通过设置 BitmapFactory.options 中 inSampleSize 的值就可以实现，也就是说采样率。提供内存缓存让程序快速处理和加载图片。其中最核心的类是LruCache (此类在android-support-v4的包中提供) 。这个类非常适合用来缓存图片，它的主要算法原理是把最近使用的对象用强引用存储在 LinkedHashMap 中，并且把最近最少使用的对象在缓存值达到预设定值之前从内存中移除。
 
-  
+  ​
 
 - http 与 http2 之间的区别
 
