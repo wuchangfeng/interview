@@ -231,6 +231,7 @@
   1.**普通广播**， broadcast,广播发出之后所有满足条件的应用都能获取到广播里面的数据，缺点是应用获取广播中的数据修改之后不能传递给其它接收广播的应用；
   2.**有序广播**，orderbroadcast,广播发出之后各应用根据应用的优先级依次接收广播，优先级高的应用接收广播之后修改的数据也可以传递给后来的接受者，优先级高的应用也可以调用abrotbroascast方法停止该广播的向下传播，优先级靠应用的android:prioioty属性控制，该值的取值区间为-1000到1000，值越大优先级越高。
 
+  3. **粘性广播**，接受的还没有注册，事后注册也可以接受
 - Intent 的匹配规则？action，category，data
 
   只有action、data、category三方都匹配，Intent才算是匹配成功，进而才能打开相应的Component。一个Component若声明了多个Intent Filter，只需要匹配任意一个即可启动该组件。
@@ -351,11 +352,11 @@
 
   * OnTouchEvent()方法：
 
-        onTouchEvent是手机屏幕事件的处理方法，是获取的对屏幕的各种操作，比如向左向右滑动，点击返回按钮等等。属于一个宏观的屏幕触摸监控。onTouchEvent方法是override 的Activity的方法。重新了Activity的onTouchEvent方法后，当屏幕有touch事件时，此方法就会别调用。
+  onTouchEvent是手机屏幕事件的处理方法，是获取的对屏幕的各种操作，比如向左向右滑动，点击返回按钮等等。属于一个宏观的屏幕触摸监控。onTouchEvent方法是override 的Activity的方法。重新了Activity的onTouchEvent方法后，当屏幕有touch事件时，此方法就会别调用。
 
   * OnTouch方法
 
-        onTouch()是OnTouchListener接口的方法，它是获取某一个控件的触摸事件，因此使用时，必须使用setOnTouchListener绑定到控件，然后才能鉴定该控件的触摸事件。当一个View绑定了OnTouchLister后，当有touch事件触发时，就会调用onTouch方法。通过getAction()方法可以获取当前触摸事件的状态：
+  onTouch()是OnTouchListener接口的方法，它是获取某一个控件的触摸事件，因此使用时，必须使用setOnTouchListener绑定到控件，然后才能鉴定该控件的触摸事件。当一个View绑定了OnTouchLister后，当有touch事件触发时，就会调用onTouch方法。通过getAction()方法可以获取当前触摸事件的状态：
 
   ACTION_DOWN：表示按下了屏幕的状态。
   ACTION_MOVE ：表示为移动手势
@@ -372,7 +373,7 @@
 
 
 
--    什么是三级缓存
+* 什么是三级缓存
 
      - 网络缓存, 不优先加载, 速度慢,浪费流量
      - 本地缓存, 次优先加载, 速度快
@@ -387,27 +388,27 @@
      - 使用 bundle
      - 使用 AIDL
 
--    AIDL 机制，其实就是 android 中的 ipc 机制
+*    AIDL 机制，其实就是 android 中的 ipc 机制
 
-              所谓AIDL：Android Interface Definition Language，是一种Android接口定义语言，用于编写Android进程间通信代码。也就是说AIDL只是一个实现进程间通信的一个工具，真正实现Android进程间通信机制的其实是幕后“主谋”Binder机制。所有有关AIDL实现进程间通信都是依赖于Android的Binder机制，那么这个Binder机制到底是个什么东西呢？
+      所谓AIDL：Android Interface Definition Language，是一种Android接口定义语言，用于编写Android进程间通信代码。也就是说AIDL只是一个实现进程间通信的一个工具，真正实现Android进程间通信机制的其实是幕后“主谋”Binder机制。所有有关AIDL实现进程间通信都是依赖于Android的Binder机制，那么这个Binder机制到底是个什么东西呢？
 
-              AIDL适用场景
+      * AIDL适用场景
 
-              官方文档特别提醒我们何时使用AIDL是必要的：只有你允许客户端从不同的应用程序为了进程间的通信而去访问你的service，以及想在你的service处理多线程。具体的不同场景下的AIDL设计规则如下：
+      官方文档特别提醒我们何时使用AIDL是必要的：只有你允许客户端从不同的应用程序为了进程间的通信而去访问你的service，以及想在你的service处理多线程。具体的不同场景下的AIDL设计规则如下：
 
-              如果不需要进行不同应用程序间的并发通信(IPC)，通过实现一个Binder对象来创建接口；或者你想进行IPC，但不需要处理多线程的，则使用Messenger对象来创建接口。无论如何，在使用AIDL前，必须要理解如何绑定service——bindService。
+      如果不需要进行不同应用程序间的并发通信(IPC)，通过实现一个Binder对象来创建接口；或者你想进行IPC，但不需要处理多线程的，则使用Messenger对象来创建接口。无论如何，在使用AIDL前，必须要理解如何绑定service——bindService。
 
-              AIDL开发步骤
+      * AIDL开发步骤
 
-              AIDL接口文件，和普通的接口内容没有什么特别，只是它的扩展名为.aidl，保存在src目录下。如果其他应用程序需要IPC，则那些应用程序的src也要带有这个文件。Android SDK tools就会在gen目录自动生成一个IBinder接口文件。service必须适当地实现这个IBinder接口。那么客户端程序就能绑定这个service并在IPC时从IBinder调用方法。每个aidl文件只能定义一个接口，而且只能是接口的声明和方法的声明。
+      AIDL接口文件，和普通的接口内容没有什么特别，只是它的扩展名为.aidl，保存在src目录下。如果其他应用程序需要IPC，则那些应用程序的src也要带有这个文件。Android SDK tools就会在gen目录自动生成一个IBinder接口文件。service必须适当地实现这个IBinder接口。那么客户端程序就能绑定这个service并在IPC时从IBinder调用方法。每个aidl文件只能定义一个接口，而且只能是接口的声明和方法的声明。
 
-              换言之，AIDL文件的作用即是在任何需要跨进程调用的方法都需要声明在涉及的每一个服务或者进程中。
+      换言之，AIDL文件的作用即是在任何需要跨进程调用的方法都需要声明在涉及的每一个服务或者进程中。
 
--    service 生命周期
+*    service 生命周期
 
-              Service对象不能自己启动，需要通过某个Activity、Service或者其他Context对象来启动。启动的方法有两种，Context.startService和Context.bindService()。两种方式的生命周期是不同的，具体如下所示。
+      Service对象不能自己启动，需要通过某个Activity、Service或者其他Context对象来启动。启动的方法有两种，Context.startService和Context.bindService()。两种方式的生命周期是不同的，具体如下所示。
 
-              Context.startService方式的生命周期： 
+      Context.startService方式的生命周期： 
               启动时，startService –> onCreate() –> onStart() 
               停止时，stopService –> onDestroy()
             
@@ -443,7 +444,7 @@
 
 -    属性动画
 
-              新引入的属性动画机制已经不再是针对于View来设计的了，也不限定于只能实现移动、缩放、旋转和淡入淡出这几种动画操作，同时也不再只是一种视觉上的动画效果了。它实际上是一种不断地对值进行操作的机制，并将值赋值到指定对象的指定属性上，可以是任意对象的任意属性。所以我们仍然可以将一个View进行移动或者缩放，但同时也可以对自定义View中的Point对象进行动画操作了。我们只需要告诉系统动画的运行时长，需要执行哪种类型的动画，以及动画的初始值和结束值，剩下的工作就可以全部交给系统去完成了。
+    新引入的属性动画机制已经不再是针对于View来设计的了，也不限定于只能实现移动、缩放、旋转和淡入淡出这几种动画操作，同时也不再只是一种视觉上的动画效果了。它实际上是一种不断地对值进行操作的机制，并将值赋值到指定对象的指定属性上，可以是任意对象的任意属性。所以我们仍然可以将一个View进行移动或者缩放，但同时也可以对自定义View中的Point对象进行动画操作了。我们只需要告诉系统动画的运行时长，需要执行哪种类型的动画，以及动画的初始值和结束值，剩下的工作就可以全部交给系统去完成了。
 
      - valueanimator
      - objectanimator
@@ -458,18 +459,16 @@
      * 对apk文件进行签名
      * 对签名后的apk文件进行对其处理
 
-
-
 -    Butterknife 最新的实现原理，主要是利用 APT 在编译期生成相关代码  https://joyrun.github.io/2016/07/19/AptHelloWorld/
 
-         APT(Annotation Processing Tool)是一种处理注释的工具,它对源代码文件进行检测找出其中的Annotation，使用Annotation进行额外的处理。
-              Annotation处理器在处理Annotation时可以根据源文件中的Annotation生成额外的源文件和其它的文件(文件具体内容由Annotation处理器的编写者决定),APT还会编译生成的源文件和原来的源文件，将它们一起生成class文件。
+    APT(Annotation Processing Tool)是一种处理注释的工具,它对源代码文件进行检测找出其中的Annotation，使用Annotation进行额外的处理。
+    Annotation处理器在处理Annotation时可以根据源文件中的Annotation生成额外的源文件和其它的文件(文件具体内容由Annotation处理器的编写者决定),APT还会编译生成的源文件和原来的源文件，将它们一起生成class文件。
 
 -    otto 与 eventbus 出现的理由以及实现原理
 
     为了简化并且更加高质量的在Activities, Fragments, Threads, Services等等之间的通信，同时解决组建之间的高耦合还能继续高效的通信。事件总线设计出现了。
-              总线，在计算机组成原理中遇到过io总线。总线的思路就是负责传递某种object到指定的地方。
-              在Android内置的Intent和BroadcastReceiver就是采用了类似事件总线的设计思路。这两者都可以起到跟事件总线类似的效果。注册广播接收器和单纯发一个intent就可以唤起其他组件，提醒其他组件更新，这是非常方便的，同时也是本文提到的两个开源方案所做不到的。但也有不好地方，它们内部的实现都需要 IPC，单从传递效率上来讲，可能并不太适合上层的组件间通信。
+    总线，在计算机组成原理中遇到过io总线。总线的思路就是负责传递某种object到指定的地方。
+    在Android内置的Intent和BroadcastReceiver就是采用了类似事件总线的设计思路。这两者都可以起到跟事件总线类似的效果。注册广播接收器和单纯发一个intent就可以唤起其他组件，提醒其他组件更新，这是非常方便的，同时也是本文提到的两个开源方案所做不到的。但也有不好地方，它们内部的实现都需要 IPC，单从传递效率上来讲，可能并不太适合上层的组件间通信。
 
 -    ContentProvider 的相关说法
 
